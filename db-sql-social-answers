@@ -1,0 +1,39 @@
+Connor Ratcliff
+
+1. SELECT name
+    -> FROM Highschooler, Friend
+    -> WHERE ID1 IN (SELECT ID 
+    -> FROM Highschooler
+    -> WHERE name = 'Gabriel')
+    -> AND ID2 = ID;
+    
+2.  SELECT H1.name, H1.grade, H2.name, H2.grade
+    FROM Highschooler H1
+        JOIN Likes ON H1.ID = Likes.ID1
+        JOIN Highschooler H2 ON H2.ID = Likes.ID2
+    WHERE (H1.grade - H2.grade) >= 2;
+
+
+3.  SELECT name, grade
+    FROM (SELECT ID2, count(*) AS c
+        FROM Likes 
+        group by ID2) counts Highschooler
+    gorup by ID2
+
+
+4.  SELECT name,grade
+    FROM Highschooler
+    WHERE ID NOT IN  (SELECT ID1 
+        FROM Likes
+        UNION
+        SELECT ID2
+        FROM Likes)
+    ORDERED BY grade, name;
+
+
+8. SELECT avg(result.c)
+    FROM    (SELECT count (*) AS c
+        FROM Friend 
+    group by ID1) result; 
+    
+    
